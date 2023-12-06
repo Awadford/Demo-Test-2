@@ -26,7 +26,36 @@
         o[m]=o[m]||function(){o._q[m===v[0]?'unshift':'push']([m].concat([].slice.call(arguments,0)));};})(v[w]);
         y=e.createElement(n);y.async=!0;y.src='https://cdn.pendo.io/agent/static/'+apiKey+'/pendo.js';
         z=e.getElementsByTagName(n)[0];z.parentNode.insertBefore(y,z);})(window,document,'script','pendo');
-})('f766548e-d6f3-4c12-4adc-76497a2fa3cf');
+
+        // This function creates visitors and accounts in Pendo
+        // You will need to replace <visitor-id-goes-here> and <account-id-goes-here> with values you use in your app
+        // Please use Strings, Numbers, or Bools for value types.
+        pendo.initialize({
+            visitor: {
+                id:              'user_001', // Required if user is logged in
+                email:        'user_001@pendo.io',// Recommended if using Pendo Feedback, or NPS Email
+                full_name:    'Alfred Un',// Recommended if using Pendo Feedback
+                role:         'Test'// Optional
+
+                // You can add any additional visitor level key-values here,
+                // as long as it's not one of the above reserved names.
+            },
+
+            account: {
+                id:              'account_001', // Highly recommended, required if using Pendo Feedback
+                name:         'Apricot',// Optional
+                status:        'Active'
+                // is_paying:    // Recommended if using Pendo Feedback
+                // monthly_value:// Recommended if using Pendo Feedback
+                // planLevel:    // Optional
+                // planPrice:    // Optional
+                // creationDate: // Optional
+
+                // You can add any additional account level key-values here,
+                // as long as it's not one of the above reserved names.
+            }
+        });
+})('2703e5ee-a679-4821-7167-7c47077b546e');
 </script>
 </head>
 
@@ -34,30 +63,7 @@
 // This function creates visitors and accounts in Pendo
     // You will need to replace <visitor-id-goes-here> and <account-id-goes-here> with values you use in your app
     // Please use Strings, Numbers, or Bools for value types.
-    pendo.initialize({
-        visitor: {
-            id:              <visitor-id-goes-here> // Required if user is logged in
-            // email:        // Recommended if using Pendo Feedback, or NPS Email
-            // full_name:    // Recommended if using Pendo Feedback
-            // role:         // Optional
-
-            // You can add any additional visitor level key-values here,
-            // as long as it's not one of the above reserved names.
-        },
-
-        account: {
-            id:              <account-id-goes-here> // Highly recommended, required if using Pendo Feedback
-            // name:         // Optional
-            // is_paying:    // Recommended if using Pendo Feedback
-            // monthly_value:// Recommended if using Pendo Feedback
-            // planLevel:    // Optional
-            // planPrice:    // Optional
-            // creationDate: // Optional
-
-            // You can add any additional account level key-values here,
-            // as long as it's not one of the above reserved names.
-        }
-    });
+    
     <div class="container">
 
         <!-- Outer Row -->
