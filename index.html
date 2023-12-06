@@ -4,7 +4,6 @@
 <head>
     
 <script>
-<script>
 (function(apiKey){
     (function(p,e,n,d,o){var v,w,x,y,z;o=p[d]=p[d]||{};o._q=o._q||[];
     v=['initialize','identify','updateOptions','pageLoad','track'];for(w=0,x=v.length;w<x;++w)(function(m){
@@ -17,10 +16,10 @@
         // Please use Strings, Numbers, or Bools for value types.
         pendo.initialize({
             visitor: {
-                id:           'user-001',// Required if user is logged in
+                id:              'user_001', // Required if user is logged in
                 email:        'user_001@pendo.io',// Recommended if using Pendo Feedback, or NPS Email
                 full_name:    'Alfred Un',// Recommended if using Pendo Feedback
-                role:         'test'// Optional
+                role:         'Test'// Optional
 
                 // You can add any additional visitor level key-values here,
                 // as long as it's not one of the above reserved names.
@@ -29,7 +28,8 @@
             account: {
                 id:              'account_001', // Highly recommended, required if using Pendo Feedback
                 name:         'Apricot',// Optional
-                is_paying:    'Active'// Recommended if using Pendo Feedback
+                status:        'Active'
+                // is_paying:    // Recommended if using Pendo Feedback
                 // monthly_value:// Recommended if using Pendo Feedback
                 // planLevel:    // Optional
                 // planPrice:    // Optional
