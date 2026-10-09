@@ -138,6 +138,29 @@
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
 
+    <!-- Pendo Track Event: user_logged_in -->
+    <script>
+        (function ($) {
+            "use strict";
+
+            // This template has no auth backend: Login / Google / Facebook link straight into the
+            // dashboard, so following one of them is the sign-in. Record it on the way through.
+            $("form.user .btn-user").on("click", function () {
+                if (!window.pendo || typeof window.pendo.track !== "function") return;
+                var $btn = $(this);
+                var method = $btn.hasClass("btn-google") ? "google"
+                    : $btn.hasClass("btn-facebook") ? "facebook" : "email_password";
+                var email = $.trim($("#exampleInputEmail").val() || "");
+                window.pendo.track("user_logged_in", {
+                    login_method: method,
+                    remember_me: $("#customCheck").is(":checked"),
+                    email_domain: method === "email_password" && email.indexOf("@") > 0
+                        ? email.split("@").pop().toLowerCase() : null
+                });
+            });
+        })(jQuery);
+    </script>
+
 </body>
 
 </html>
