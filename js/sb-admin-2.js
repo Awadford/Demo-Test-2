@@ -53,4 +53,28 @@
     e.preventDefault();
   });
 
+  // Topbar search (desktop form and the mobile search dropdown) — runs on Enter or the
+  // search button and is recorded as a Pendo Track Event. There's no search backend yet,
+  // so submitting stays on the page instead of reloading it.
+  function runTopbarSearch($form) {
+    var query = $.trim($form.find("input").val() || "");
+    if (!query || !window.pendo || typeof window.pendo.track !== "function") return;
+    window.pendo.track("topbar_search_submitted", {
+      query: query.substring(0, 100),
+      query_length: query.length,
+      search_location: $form.closest(".dropdown-menu").length ? "topbar_mobile_dropdown" : "topbar",
+      page_title: document.title,
+      page_path: window.location.pathname
+    });
+  }
+
+  $(".navbar-search").on("submit", function(e) {
+    e.preventDefault();
+    runTopbarSearch($(this));
+  });
+
+  $(".navbar-search .input-group-append .btn").on("click", function() {
+    runTopbarSearch($(this).closest(".navbar-search"));
+  });
+
 })(jQuery); // End of use strict

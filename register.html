@@ -135,6 +135,31 @@
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
 
+    <!-- Pendo Track Event: account_registered -->
+    <script>
+        (function ($) {
+            "use strict";
+
+            // This template has no sign-up backend: completing the form (or the Google / Facebook
+            // option) is the account creation, so record it as the user follows the button.
+            $("form.user .btn-user").on("click", function () {
+                if (!window.pendo || typeof window.pendo.track !== "function") return;
+                var $btn = $(this);
+                var method = $btn.hasClass("btn-google") ? "google"
+                    : $btn.hasClass("btn-facebook") ? "facebook" : "email_password";
+                var email = $.trim($("#exampleInputEmail").val() || "");
+                var password = $("#exampleInputPassword").val() || "";
+                window.pendo.track("account_registered", {
+                    signup_method: method,
+                    email_domain: method === "email_password" && email.indexOf("@") > 0
+                        ? email.split("@").pop().toLowerCase() : null,
+                    passwords_matched: method === "email_password"
+                        ? password !== "" && password === ($("#exampleRepeatPassword").val() || "") : null
+                });
+            });
+        })(jQuery);
+    </script>
+
 </body>
 
 </html>
